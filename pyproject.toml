@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "guglhupf"
+version = "0.1.0"
+description = ""
+authors = ["Frank Blechschmidt <contact@frank-blechschmidt.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "~3.7"
+fastapi = "^0.63.0"
+pydantic = {extras = ["dotenv"], version = "^1.8.1"}
+loguru = "^0.5.3"
+single-source = "^0.1.5"
+uvicorn = {extras = ["standard"], version = "^0.13.4"}
+
+[tool.poetry.dev-dependencies]
+wemake-python-styleguide = "^0.15.2"
+autopep8 = "^1.5.7"
+bandit = "^1.7.0"
+dodgy = "^0.2.1"
+mypy = "^0.812"
+safety = "^1.10.3"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
