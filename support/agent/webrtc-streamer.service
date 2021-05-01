@@ -1,0 +1,14 @@
+# /lib/systemd/system/webrtc-streamer.service
+[Unit]
+Description=WebRTC-streamer
+After=video-mirror.service
+
+[Service]
+Type=simple
+ExecStart=webrtc-streamer
+Restart=always
+RestartSec=1
+StartLimitIntervalSec=0
+
+[Install]
+WantedBy=multi-user.target

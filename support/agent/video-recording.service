@@ -1,0 +1,14 @@
+# /lib/systemd/system/video-recording.service
+[Unit]
+Description=Video Recording with FFmpeg
+After=video-mirror.service
+
+[Service]
+Type=simple
+ExecStart=video-recording
+Restart=always
+RestartSec=1
+StartLimitIntervalSec=0
+
+[Install]
+WantedBy=multi-user.target

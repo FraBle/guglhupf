@@ -1,0 +1,15 @@
+# /lib/systemd/system/video-mirror.service
+[Unit]
+Description=Mirror /dev/video0 to /dev/video1 with ffmpeg
+BindsTo=dev-video0.device dev-video1.device
+After=dev-video0.device dev-video1.device
+
+[Service]
+Type=simple
+ExecStart=ffmpeg -f v4l2 -i /dev/video0 -codec copy -f v4l2 /dev/video1
+Restart=always
+RestartSec=1
+StartLimitIntervalSec=0
+
+[Install]
+WantedBy=multi-user.target
