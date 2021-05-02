@@ -12,12 +12,8 @@ The Camera Agents use the [Video4Linux V4L2](https://www.kernel.org/doc/html/lat
 
 ### Preparing a Raspberry Pi as Camera Agent
 
-> These steps have been executed using a Raspberry Pi 3 Model B+ but should be
-> very similar on newer models like the Raspberry Pi 4 Model B.
->
-> This tutorial is based on [DietPi](https://dietpi.com/), but the steps should
-> be similar on Raspberry Pi OS and other Raspberry Pi OS-based systems.
->
+> These steps have been verified using a Raspberry Pi 3 Model B+ but should be the same on newer models like the Raspberry Pi 4 Model B.
+> This tutorial is based on [DietPi](https://dietpi.com/), but the steps should be similar on Raspberry Pi OS and other Raspberry Pi OS-based systems.
 > Your Raspberry Pi should have the [Camera Module](https://www.raspberrypi.org/products/camera-module-v2/) connected.
 
 1. Follow the [DietPi instructions](https://dietpi.com/docs/install/) to download the latest DietPi release and flash it to an SD card with balenaEtcher.
@@ -25,37 +21,49 @@ The Camera Agents use the [Video4Linux V4L2](https://www.kernel.org/doc/html/lat
     > Stop after step "2. Flash the DietPi image" since we will prepare a
     > headless install and need to change some files before the first boot.
 
-2. Reinsert / mount the SD card (typically called `boot`) once more after balenaEtcher finished.
+2. Reinsert/mount the SD card (typically called `boot`) once more after balenaEtcher is finished.
 3. Open `boot/dietpi.txt` in your favorite editor/IDE and update the settings for a headless boot.
 
     > An [example `dietpi.txt`](https://github.com/FraBle/guglhupf/blob/main/support/agent/dietpi.txt) can be found in the support folder.  
-    > Some of your settings might differ (e.g. regional settings)
+    > Some of your settings might differ (e.g., regional settings)
 
     Overview of changed values:
 
     ```diff
     -AUTO_SETUP_ACCEPT_LICENSE=0
     +AUTO_SETUP_ACCEPT_LICENSE=1
+
     -AUTO_SETUP_LOCALE=C.UTF-8
     +AUTO_SETUP_LOCALE=en_US.UTF-8
+
     -AUTO_SETUP_KEYBOARD_LAYOUT=gb
     +AUTO_SETUP_KEYBOARD_LAYOUT=us
+
     -AUTO_SETUP_TIMEZONE=Europe/London
     +AUTO_SETUP_TIMEZONE=America/Los_Angeles
+
+    
     -AUTO_SETUP_NET_WIFI_ENABLED=0
     +AUTO_SETUP_NET_WIFI_ENABLED=1
+
     -AUTO_SETUP_NET_WIFI_COUNTRY_CODE=GB
     +AUTO_SETUP_NET_WIFI_COUNTRY_CODE=US
+
     -AUTO_SETUP_NET_HOSTNAME=DietPi
     +AUTO_SETUP_NET_HOSTNAME=<custom hostname>
+
     -AUTO_SETUP_HEADLESS=0
     +AUTO_SETUP_HEADLESS=1
+
     -AUTO_SETUP_AUTOSTART_TARGET_INDEX=0
     +AUTO_SETUP_AUTOSTART_TARGET_INDEX=7
+
     -AUTO_SETUP_AUTOMATED=0
     +AUTO_SETUP_AUTOMATED=1
+
     -AUTO_SETUP_GLOBAL_PASSWORD=dietpi
     +AUTO_SETUP_GLOBAL_PASSWORD=<custom password>
+
     -#AUTO_SETUP_INSTALL_SOFTWARE_ID=23
     +AUTO_SETUP_INSTALL_SOFTWARE_ID=0   #OpenSSH Client
     +AUTO_SETUP_INSTALL_SOFTWARE_ID=7   #FFmpeg
@@ -64,8 +72,10 @@ The Camera Agents use the [Video4Linux V4L2](https://www.kernel.org/doc/html/lat
     +AUTO_SETUP_INSTALL_SOFTWARE_ID=103 #DietPi-RAMlog
     +AUTO_SETUP_INSTALL_SOFTWARE_ID=104 #Dropbear
     +AUTO_SETUP_INSTALL_SOFTWARE_ID=110 #NFS Client
+
     -SURVEY_OPTED_IN=-1
     +SURVEY_OPTED_IN=0
+
     -CONFIG_BOOT_WAIT_FOR_NETWORK=1
     +CONFIG_BOOT_WAIT_FOR_NETWORK=2
     ```
@@ -75,16 +85,16 @@ The Camera Agents use the [Video4Linux V4L2](https://www.kernel.org/doc/html/lat
 
 4. Unmount the SD card, insert it into the Raspberry Pi, and power it on.
 
-    > It might take a moment to fully come an to allow an SSH session since it
+    > It might take a moment to fully boot up and allow an SSH session since it
     > will install all listed software on the first boot.
 
 5. Check your WiFi router for connected devices to retrieve the IP of the Raspberry Pi.
 6. Open an SSH session to the Raspberry Pi: `ssh root@<rpi-ip>`
 
-    > All upcomiing steps are executed on the Raspberry Pi.  
-    > You can also use `ssh-copy-id` to install your public SSH key as as an
+    > All upcoming steps are executed on the Raspberry Pi.  
+    > You can also use `ssh-copy-id` to install your public SSH key as an
     > authorized key on the Raspberry Pi to avoid typing your password for
-    > new SSH session.
+    > new SSH sessions.
 
     ```bash
     ssh-copy-id root@<rpi-ip>
@@ -99,11 +109,11 @@ The Camera Agents use the [Video4Linux V4L2](https://www.kernel.org/doc/html/lat
 8. Mount the NFS directory of the guglhupf controller to using `dietpi-drive_manager`.
 
     > Select `Add network drive`, then `NFS`, enter the guglhupf controller IP,
-    > and give it a unique folder name (e.g. `recordings`).
+    > and give it a unique folder name (e.g., `recordings`).
 
 9. Follow the other steps below to set up...
 
-    - the open source `bcm2835-v4l2` camera driver
+    - the open-source `bcm2835-v4l2` camera driver
     - the camera utils `v4l-utils` for controlling rotation and resolution
     - a loopback device using `v4l2loopback` to mirror `dev/video0` for multi-client access
     - a mirror from `dev/video0` to `dev/video1` using FFmpeg
@@ -122,7 +132,7 @@ The Camera Agents use the [Video4Linux V4L2](https://www.kernel.org/doc/html/lat
 
 2. Reboot and check that `/dev/video0` exists.
 
-### Install `v4l-utils` and set up camera autoamtically with `v4l2-ctl`
+### Install `v4l-utils` and set up camera automatically with `v4l2-ctl`
 
 1. Install `v4l-utils` for debugging & control commands.
 
@@ -156,7 +166,7 @@ The Camera Agents use the [Video4Linux V4L2](https://www.kernel.org/doc/html/lat
     SUBSYSTEM=="video4linux", PROGRAM="/usr/bin/v4l2-ctl --set-fmt-video=width=640,height=480 --set-ctrl=rotate=90"
     ```
 
-    > Adjust the settings according to your needs (e.g. camera mounting
+    > Adjust the settings according to your needs (e.g., camera mounting
     > rotation).
 
 3. Reboot and check updated settings with `v4l2-ctl --device=/dev/video0 --all`.
@@ -196,7 +206,7 @@ The Camera Agents use the [Video4Linux V4L2](https://www.kernel.org/doc/html/lat
 
 ### Set up FFmpeg to mirror `/dev/video0` to `/dev/video1`
 
-> Based on [this](https://unix.stackexchange.com/a/186903) StackOverFlow answer.
+> Based on [this](https://unix.stackexchange.com/a/186903) StackOverflow answer.
 
 1. Add video devices to `systemd` via `udev` subsystem.
 
@@ -350,14 +360,14 @@ The Camera Agents use the [Video4Linux V4L2](https://www.kernel.org/doc/html/lat
     /mnt/recordings/guglhupf/video_front_%Y-%m-%d_%H-%M-%S.mp4
     ```
 
-    > There is a lot going on here and you might have to adjust a couple of
-    > settings (e.g. the filename template string).  
+    > A lot is going on here, and you might have to adjust a couple of settings
+    > (e.g., the filename template string).  
     > FFmpeg reads from `/dev/video1` in a fixed resolution of 640x480. It
-    > writes segments of the video feed to file. Each segment is 5min (300sec)
-    > with key frames enforced at the same time mark to allow a smooth cutover.
+    > writes segments of the video feed to disk. Each segment is 5min (300sec),
+    > with keyframes enforced at the same time mark to allow a smooth cutover.
     > It uses two `drawtext` filters: one to add GPS coordinates from a file
-    > (`gps.txt`) to the lower left corner and one to add timestamps to the
-    > lower right corner of every frame. Is uses the hardware-accelerated
+    > (`gps.txt`) to the lower-left corner and one to add timestamps to the
+    > lower-right corner of every frame. It uses the hardware-accelerated
     > `h264_omx` codec and writes the output files to the configured NFS folder
     > `/mnt/recordings` with timestamps in the file name.
 
