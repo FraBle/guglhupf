@@ -12,9 +12,9 @@ The Camera Agents use the [Video4Linux V4L2](https://www.kernel.org/doc/html/lat
 
 ### Preparing a Raspberry Pi as Camera Agent
 
-> These steps have been verified using a Raspberry Pi 3 Model B+ but should be the same on newer models like the Raspberry Pi 4 Model B.
-> This tutorial is based on [DietPi](https://dietpi.com/), but the steps should be similar on Raspberry Pi OS and other Raspberry Pi OS-based systems.
-> Your Raspberry Pi should have the [Camera Module](https://www.raspberrypi.org/products/camera-module-v2/) connected.
+These steps have been verified using a Raspberry Pi 3 Model B+ but should be the same on newer models like the Raspberry Pi 4 Model B.
+This tutorial is based on [DietPi](https://dietpi.com/), but the steps should be similar on Raspberry Pi OS and other Raspberry Pi OS-based systems.
+Your Raspberry Pi should have the [Camera Module](https://www.raspberrypi.org/products/camera-module-v2/) connected.
 
 1. Follow the [DietPi instructions](https://dietpi.com/docs/install/) to download the latest DietPi release and flash it to an SD card with balenaEtcher.
 
