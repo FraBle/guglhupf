@@ -8,7 +8,7 @@ Type=simple
 ExecStart=/usr/local/bin/gps-sync
 Restart=always
 RestartSec=1
-StartLimitIntervalSec=0
+StartLimitInterval=0
 Environment=PATH=/root/.pyenv/versions/3.7.10/bin/:$PATH
 
 [Install]

@@ -8,7 +8,7 @@ Type=simple
 ExecStart=webrtc-streamer
 Restart=always
 RestartSec=1
-StartLimitIntervalSec=0
+StartLimitInterval=0
 
 [Install]
 WantedBy=multi-user.target

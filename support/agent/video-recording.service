@@ -8,7 +8,7 @@ Type=simple
 ExecStart=video-recording
 Restart=always
 RestartSec=1
-StartLimitIntervalSec=0
+StartLimitInterval=0
 
 [Install]
 WantedBy=multi-user.target
