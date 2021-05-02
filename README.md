@@ -113,12 +113,12 @@ Your Raspberry Pi should have the [Camera Module](https://www.raspberrypi.org/pr
 
 9. Follow the other steps below to set up...
 
-    - the open-source `bcm2835-v4l2` camera driver
-    - the camera utils `v4l-utils` for controlling rotation and resolution
-    - a loopback device using `v4l2loopback` to mirror `dev/video0` for multi-client access
-    - a mirror from `dev/video0` to `dev/video1` using FFmpeg
-    - a live video stream with `webrtc-streamer`
-    - a recording service with FFmpeg
+    - [the open-source `bcm2835-v4l2` camera driver](#set-up-bcm2835-v4l2-camera-driver)
+    - [the camera utils `v4l-utils` for controlling rotation and resolution](#install-v4l-utils-and-set-up-camera-automatically-with-v4l2-ctl)
+    - [a loopback device using `v4l2loopback` to mirror `dev/video0` for multi-client access](#install-and-set-up-v4l2loopback-for-devvideo1-loopback-device)
+    - [a mirror from `dev/video0` to `dev/video1` using FFmpeg](#set-up-ffmpeg-to-mirror-devvideo0-to-devvideo1)
+    - [a live video stream with `webrtc-streamer`](#install-and-set-up-webrtc-streamer-for-live-stream-of-camera-feed)
+    - [a recording service with FFmpeg](#set-up-ffmpeg-to-record-camera-feed-in-segments-to-file)
 
 ### Set up `bcm2835-v4l2` camera driver
 
