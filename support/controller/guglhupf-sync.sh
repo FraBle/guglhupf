@@ -17,4 +17,7 @@
             rm "${RECORDINGS_DIR}${filename}"
         fi
     done <<< "$ALL_GDRIVE_FILES"
+
+    # Save all uploaded files to text file
+    /root/go/bin/drive list -no-prompt -files "${RECORDINGS_DIR}${DRIVE_DIR}" > "${RECORDINGS_DIR}/uploaded_files.txt"
 } 2>&1 | tee -a /var/log/guglhupf-sync.log

@@ -1,7 +1,6 @@
 """Settings management using pydantic."""
 
 from pathlib import Path
-from typing import Union
 
 from pydantic import BaseSettings
 from single_source import get_version
@@ -19,6 +18,10 @@ class Settings(BaseSettings):
         __name__, Path(__file__).parent.parent.parent,
     )
     debug: bool = False
+    cameras: int = 2
+    recordings_dir: Path = Path('/mnt/recordings/guglhupf/')
+    uploaded_files_txt: Path = Path('/mnt/recordings/uploaded_files.txt')
+    gps_txt: Path = Path('/mnt/recordings/gps.txt')
     log_level: str = 'info'
     log_format: str = (
         '<level>{level: <8}</level> ' +
