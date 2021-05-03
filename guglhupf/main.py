@@ -22,10 +22,20 @@ setup_logging(
 
 
 @app.websocket('/ws/system')
-async def websocket_endpoint(websocket: WebSocket):
+async def system_ws(websocket: WebSocket):
     # Cannot use APIRouter in sub-resource until this is merged:
     # https://github.com/tiangolo/fastapi/pull/2640
     await websocket.accept()
     while True:
         await websocket.send_json(all_stats())
+        await asyncio.sleep(0.1)
+
+
+@app.websocket('/ws/gps')
+async def gps_ws(websocket: WebSocket):
+    await websocket.accept()
+    while True:
+        with open(settings.gps_txt) as gps_txt:
+            gps_coordinates = gps_txt.read()
+        await websocket.send_text(gps_coordinates)
         await asyncio.sleep(0.1)
