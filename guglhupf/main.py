@@ -1,6 +1,5 @@
 import asyncio
 from fastapi import FastAPI, WebSocket
-from fastapi.responses import HTMLResponse
 
 from guglhupf.core.settings import settings
 from guglhupf.core.log import setup_logging

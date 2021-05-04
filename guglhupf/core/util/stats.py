@@ -47,6 +47,8 @@ def gpu():
     vcgm = Vcgencmd()
     return {
         'temp': vcgm.measure_temp(),
+        'clockSpeed': '{0:.0f} MHz'.format(vcgm.measure_clock('core') / 1e+6),
+        'volts': '{0} V'.format(vcgm.measure_volts('core')),
     }
 
 
@@ -98,9 +100,7 @@ def system():
         ).strip().capitalize(),
         'kernel': platform.release(),
         'started': arrow.get(psutil.boot_time()).humanize(),
-        'load': '{0:.1f}%'.format(
-            psutil.getloadavg()[0] / psutil.cpu_count() * 100,
-        ),
+        'load': round(psutil.getloadavg()[0] / psutil.cpu_count() * 100, 1),
     }
 
 
