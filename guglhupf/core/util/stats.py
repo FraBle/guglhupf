@@ -3,6 +3,7 @@ import json
 import platform
 import socket
 
+import arrow
 import bitmath
 import psutil
 from cpuinfo import get_cpu_info
@@ -96,8 +97,10 @@ def system():
             platform.linux_distribution(),
         ).strip().capitalize(),
         'kernel': platform.release(),
-        'bootTimeEpoch': psutil.boot_time(),
-        'loadAvgPct': psutil.getloadavg()[0] / psutil.cpu_count() * 100,
+        'started': arrow.get(psutil.boot_time()).humanize(),
+        'load': '{0:.1f}%'.format(
+            psutil.getloadavg()[0] / psutil.cpu_count() * 100,
+        ),
     }
 
 
@@ -106,7 +109,7 @@ def software():
     return {
         'version': settings.app_version,
         'git': repo.git.rev_parse(repo.head.commit.hexsha, short=7),
-        'pythonVersion': platform.python_version(),
+        'python': platform.python_version(),
     }
 
 

@@ -17,6 +17,7 @@ psutil = "^5.8.0"
 vcgencmd = "^0.1.1"
 py-cpuinfo = "^8.0.0"
 gitpython = "^3.1.15"
+arrow = "^1.1.0"
 
 [tool.poetry.dev-dependencies]
 wemake-python-styleguide = "^0.15.2"

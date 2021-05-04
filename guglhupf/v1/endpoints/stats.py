@@ -1,3 +1,4 @@
+from operator import itemgetter
 from guglhupf.core.util.router import APIRouter
 from guglhupf.core.util.stats import system, video, software
 
@@ -12,14 +13,41 @@ router = APIRouter(
 
 @router.get('/system')
 async def system_stats():
-    return system()
+    return {
+        'attributes': sorted([
+            {
+                'attribute': system_attribute,
+                'value': current_value,
+            }
+            for system_attribute, current_value in system().items()
+        ], key=itemgetter('attribute'),
+        ),
+    }
 
 
 @router.get('/video')
 async def video_stats():
-    return video()
+    return {
+        'attributes': sorted([
+            {
+                'attribute': video_attribute,
+                'value': current_value,
+            }
+            for video_attribute, current_value in video().items()
+        ], key=itemgetter('attribute'),
+        ),
+    }
 
 
 @router.get('/software')
 async def software_stats():
-    return software()
+    return {
+        'attributes': sorted([
+            {
+                'attribute': software_attribute,
+                'value': current_value,
+            }
+            for software_attribute, current_value in software().items()
+        ], key=itemgetter('attribute'),
+        ),
+    }

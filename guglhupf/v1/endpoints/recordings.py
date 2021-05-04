@@ -27,25 +27,27 @@ async def list_recordings(
         }
 
     all_videos = [
-        (
-            video.strip().split('/')[-1],
-            video.strip().split('/')[-1] in all_uploaded_videos,
-        )
+        {
+            'fileName': video.strip().split('/')[-1],
+            'uploaded':video.strip().split('/')[-1] in all_uploaded_videos,
+        }
         for video in fnmatch.filter(
             [str(vid_file) for vid_file in settings.recordings_dir.iterdir()],
             '*.mp4',
         )
     ]
 
-    return filter(
-        lambda vid: all([
-            front or not vid[0].startswith('video_front_'),
-            back or not vid[0].startswith('video_back_'),
-            cloud or not vid[1],
-            local or vid[1],
-        ]),
-        all_videos,
-    )
+    return {
+        'recordings': list(filter(
+            lambda vid: all([
+                front or not vid['fileName'].startswith('video_front_'),
+                back or not vid['fileName'].startswith('video_back_'),
+                cloud or not vid['uploaded'],
+                local or vid['uploaded'],
+            ]),
+            all_videos,
+        )),
+    }
 
 
 @router.get('/{video}')
