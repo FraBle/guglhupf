@@ -3,7 +3,7 @@ from fastapi import FastAPI, WebSocket
 
 from guglhupf.core.settings import settings
 from guglhupf.core.log import setup_logging
-from guglhupf.core.util.stats import all_stats
+from guglhupf.core.stats import system, car
 from guglhupf.v1 import api
 
 app = FastAPI(
@@ -12,6 +12,7 @@ app = FastAPI(
     version=settings.app_version,
 )
 app.include_router(api.router)
+car.start()
 
 # Init logging last so it can override all loggers
 setup_logging(
@@ -26,7 +27,15 @@ async def system_ws(websocket: WebSocket):
     # https://github.com/tiangolo/fastapi/pull/2640
     await websocket.accept()
     while True:
-        await websocket.send_json(all_stats())
+        await websocket.send_json(system.all_stats())
+        await asyncio.sleep(0.1)
+
+
+@app.websocket('/ws/car')
+async def car_ws(websocket: WebSocket):
+    await websocket.accept()
+    while True:
+        await websocket.send_json(car.all_stats())
         await asyncio.sleep(0.1)
 
 

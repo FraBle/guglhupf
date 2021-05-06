@@ -210,6 +210,25 @@ url = "https://www.piwheels.org/simple"
 reference = "piwheels"
 
 [[package]]
+name = "elm327-emulator"
+version = "2.1.0"
+description = "ELM327 Emulator for testing software interfacing OBDII via ELM327 adapter"
+category = "dev"
+optional = false
+python-versions = ">3.5"
+
+[package.dependencies]
+obd = "*"
+python-daemon = "*"
+pyyaml = "*"
+tendo = {version = "*", markers = "platform_system == \"Windows\""}
+
+[package.source]
+type = "legacy"
+url = "https://www.piwheels.org/simple"
+reference = "piwheels"
+
+[[package]]
 name = "eradicate"
 version = "2.0.0"
 description = "Removes commented-out code."
@@ -606,6 +625,19 @@ url = "https://www.piwheels.org/simple"
 reference = "piwheels"
 
 [[package]]
+name = "lockfile"
+version = "0.12.2"
+description = "Platform-independent file locking module"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.source]
+type = "legacy"
+url = "https://www.piwheels.org/simple"
+reference = "piwheels"
+
+[[package]]
 name = "loguru"
 version = "0.5.3"
 description = "Python logging made (stupidly) simple"
@@ -673,6 +705,23 @@ url = "https://www.piwheels.org/simple"
 reference = "piwheels"
 
 [[package]]
+name = "obd"
+version = "0.7.1"
+description = "Serial module for handling live sensor data from a vehicle's OBD-II port"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+pint = ">=0.7.0,<0.8.0"
+pyserial = ">=3.0.0,<4.0.0"
+
+[package.source]
+type = "legacy"
+url = "https://www.piwheels.org/simple"
+reference = "piwheels"
+
+[[package]]
 name = "packaging"
 version = "20.9"
 description = "Core utilities for Python packages"
@@ -711,6 +760,19 @@ python-versions = "*"
 
 [package.dependencies]
 flake8-polyfill = ">=1.0.2,<2"
+
+[package.source]
+type = "legacy"
+url = "https://www.piwheels.org/simple"
+reference = "piwheels"
+
+[[package]]
+name = "pint"
+version = "0.7.2"
+description = "Physical quantities module"
+category = "main"
+optional = false
+python-versions = "*"
 
 [package.source]
 type = "legacy"
@@ -829,6 +891,42 @@ description = "Python parsing module"
 category = "dev"
 optional = false
 python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
+
+[package.source]
+type = "legacy"
+url = "https://www.piwheels.org/simple"
+reference = "piwheels"
+
+[[package]]
+name = "pyserial"
+version = "3.5"
+description = "Python Serial Port Extension"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.extras]
+cp2110 = ["hidapi"]
+
+[package.source]
+type = "legacy"
+url = "https://www.piwheels.org/simple"
+reference = "piwheels"
+
+[[package]]
+name = "python-daemon"
+version = "2.3.0"
+description = "Library to implement a well-behaved Unix daemon process."
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+docutils = "*"
+lockfile = ">=0.10"
+
+[package.extras]
+test = ["coverage", "docutils", "testscenarios (>=0.4)", "testtools"]
 
 [package.source]
 type = "legacy"
@@ -1015,6 +1113,23 @@ python-versions = ">=3.6"
 [package.dependencies]
 importlib-metadata = {version = ">=1.7.0", markers = "python_version < \"3.8\""}
 pbr = ">=2.0.0,<2.1.0 || >2.1.0"
+
+[package.source]
+type = "legacy"
+url = "https://www.piwheels.org/simple"
+reference = "piwheels"
+
+[[package]]
+name = "tendo"
+version = "0.2.15"
+description = "A Python library that extends some core functionality"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+pbr = "*"
+six = ">=1.7.2"
 
 [package.source]
 type = "legacy"
@@ -1252,7 +1367,7 @@ reference = "piwheels"
 [metadata]
 lock-version = "1.1"
 python-versions = "~3.7"
-content-hash = "2155e4c639e7f075274faebbfb442c8b15718948bdf5bd06ef954c9b3ebbda29"
+content-hash = "b784d30b4f828a1175e4be82c57baa80ee341ba5e57c8f7a980b4210cac47881"
 
 [metadata.files]
 arrow = [
@@ -1296,6 +1411,9 @@ dodgy = [
 ]
 dparse = [
     {file = "dparse-0.5.1-py3-none-any.whl", hash = "sha256:49d8d27b4f243c5be550fcdc4f0a959368ef5f1fc0a7afff6533c54e1c61f83b"},
+]
+elm327-emulator = [
+    {file = "ELM327_emulator-2.1.0-py3-none-any.whl", hash = "sha256:0555fa9e82b075cfb5640701c1521eb524ed2536a1bc4137dd734a506e36200f"},
 ]
 eradicate = [
     {file = "eradicate-2.0.0-py3-none-any.whl", hash = "sha256:649ae86be56de7f24011a65ab5524fee5ad4f38ee456d201ca32b972ccf3fa9a"},
@@ -1369,6 +1487,9 @@ importlib-metadata = [
 isort = [
     {file = "isort-5.8.0-py3-none-any.whl", hash = "sha256:2bb1680aad211e3c9944dbce1d4ba09a989f04e238296c87fe2139faa26d655d"},
 ]
+lockfile = [
+    {file = "lockfile-0.12.2-py2.py3-none-any.whl", hash = "sha256:6c3cb24f344923d30b2785d5ad75182c8ea7ac1b6171b08657258ec7429d50fa"},
+]
 loguru = [
     {file = "loguru-0.5.3-py3-none-any.whl", hash = "sha256:f8087ac396b5ee5f67c963b495d615ebbceac2796379599820e324419d53667c"},
 ]
@@ -1381,6 +1502,9 @@ mypy = [
 mypy-extensions = [
     {file = "mypy_extensions-0.4.3-py2.py3-none-any.whl", hash = "sha256:090fedd75945a69ae91ce1303b5824f428daf5a028d2f6ab8a299250a846f15d"},
 ]
+obd = [
+    {file = "obd-0.7.1-py3-none-any.whl", hash = "sha256:9ff5fdea0aed0822e026bf9d7a9ebb2c523763e63f5f47cded8695e7f7bc6f34"},
+]
 packaging = [
     {file = "packaging-20.9-py2.py3-none-any.whl", hash = "sha256:67714da7f7bc052e064859c05c595155bd1ee9f69f76557e21f051443c20947a"},
 ]
@@ -1389,6 +1513,9 @@ pbr = [
 ]
 pep8-naming = [
     {file = "pep8_naming-0.11.1-py2.py3-none-any.whl", hash = "sha256:f43bfe3eea7e0d73e8b5d07d6407ab47f2476ccaeff6937c84275cd30b016738"},
+]
+pint = [
+    {file = "Pint-0.7.2-py2.py3-none-any.whl", hash = "sha256:cb88ff6bf55a6dab4ff814f4d134511fe6df09548475452b69d56721b5a4d95e"},
 ]
 psutil = [
     {file = "psutil-5.8.0-cp35-cp35m-linux_armv6l.whl", hash = "sha256:1ef2ab49f9138c6fc67ec9c3c5eac1b1345cf9c990b0c37af50e70d8a0a7b30e"},
@@ -1416,6 +1543,12 @@ pygments = [
 ]
 pyparsing = [
     {file = "pyparsing-2.4.7-py2.py3-none-any.whl", hash = "sha256:ef9d7589ef3c200abe66653d3f1ab1033c3c419ae9b9bdb1240a85b024efc88b"},
+]
+pyserial = [
+    {file = "pyserial-3.5-py2.py3-none-any.whl", hash = "sha256:c4451db6ba391ca6ca299fb3ec7bae67a5c55dde170964c7a14ceefec02f2cf0"},
+]
+python-daemon = [
+    {file = "python_daemon-2.3.0-py2.py3-none-any.whl", hash = "sha256:191c7b67b8f7aac58849abf54e19fe1957ef7290c914210455673028ad454989"},
 ]
 python-dateutil = [
     {file = "python_dateutil-2.8.1-py2.py3-none-any.whl", hash = "sha256:75bb3f31ea686f1197762692a9ee6a7550b59fc6ca3a1f4b5d7e32fb98e2da2a"},
@@ -1480,6 +1613,9 @@ starlette = [
 ]
 stevedore = [
     {file = "stevedore-3.3.0-py3-none-any.whl", hash = "sha256:50d7b78fbaf0d04cd62411188fa7eedcb03eb7f4c4b37005615ceebe582aa82a"},
+]
+tendo = [
+    {file = "tendo-0.2.15-py2.py3-none-any.whl", hash = "sha256:288e2d1eaa055a2625bd863b63a95854274cbdace6bb8f4323ee07482c343eee"},
 ]
 testfixtures = [
     {file = "testfixtures-6.17.1-py2.py3-none-any.whl", hash = "sha256:9ed31e83f59619e2fa17df053b241e16e0608f4580f7b5a9333a0c9bdcc99137"},

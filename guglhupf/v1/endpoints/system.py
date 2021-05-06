@@ -1,6 +1,6 @@
 from operator import itemgetter
 from guglhupf.core.util.router import APIRouter
-from guglhupf.core.util.stats import system, video, software, all_stats
+from guglhupf.core.stats.system import system, video, software, all_stats
 
 # Cannot be used for Websockets because of `prefix` until this is merged:
 # https://github.com/tiangolo/fastapi/pull/2640

@@ -22,6 +22,7 @@ class Settings(BaseSettings):
     recordings_dir: Path = Path('/mnt/recordings/guglhupf/')
     uploaded_files_txt: Path = Path('/mnt/recordings/uploaded_files.txt')
     gps_txt: Path = Path('/mnt/recordings/gps.txt')
+    obd_device: str = '/dev/pts/2'
     log_level: str = 'info'
     log_format: str = (
         '<level>{level: <8}</level> ' +
