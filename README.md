@@ -4,13 +4,48 @@
 
 ### Controller Setup
 
+The controller hosts the main components for the dashcam control station:
+
+- the `guglhupf` Python backend based on [`FastApi`](https://fastapi.tiangolo.com/)
+- the [`zuckerguss`](https://github.com/FraBle/zuckerguss) frontend based on [`React`](https://reactjs.org/)
+- the `nginx` reverse proxy to serve as entry point
+- the `nfs`-managed storage for video recordings and gps location sharing
+- the `gps-sync` command and cronjob to continously update location data from [`gpsd`](https://gpsd.gitlab.io/gpsd/)
+- the `guglhupf-sync` command and cronjob to upload recordings to Google Drive using [`drive`](https://github.com/odeke-em/drive)
+
+#### Controller Setup Guides
+
+##### Setting up `nginx` as reverse proxy
+
+1. Install `nginx` using `dietpi-software`.
+
+2. Create a `guglhupf.conf` nginx config file.
+
+    ```bash
+    sudo nano /etc/nginx/conf.d/guglhupf.conf`
+    ```
+
+    > The content of [`guglhupf.conf`](https://github.com/FraBle/guglhupf/blob/main/resources/controller/guglhupf.conf) can be found in the `resources` folder.
+
+3. Disable the default `nginx` config.
+
+    ```bash
+    sudo unlink /etc/nginx/sites-enabled/default
+    ```
+
+4. Restart the nginx service.
+
+    ```bash
+    sudo systemctl restart nginx.service
+    ```
+
 ### Agent Setup
 
 The Camera Agents use the [Video4Linux V4L2](https://www.kernel.org/doc/html/latest/driver-api/media/v4l2-core.html) API to process the video feed from the [Raspberry Pi Camera Module](https://www.raspberrypi.org/products/camera-module-v2/).
 
-## Resources
+#### Agent Setup Guides
 
-### Preparing a Raspberry Pi as Camera Agent
+##### Preparing a Raspberry Pi as Camera Agent
 
 These steps have been verified using a Raspberry Pi 3 Model B+ but should be the same on newer models like the Raspberry Pi 4 Model B.
 This tutorial is based on [DietPi](https://dietpi.com/), but the steps should be similar on Raspberry Pi OS and other Raspberry Pi OS-based systems.
@@ -24,7 +59,7 @@ Your Raspberry Pi should have the [Camera Module](https://www.raspberrypi.org/pr
 2. Reinsert/mount the SD card (typically called `boot`) once more after balenaEtcher is finished.
 3. Open `boot/dietpi.txt` in your favorite editor/IDE and update the settings for a headless boot.
 
-    > An [example `dietpi.txt`](https://github.com/FraBle/guglhupf/blob/main/support/agent/dietpi.txt) can be found in the support folder.  
+    > An [example `dietpi.txt`](https://github.com/FraBle/guglhupf/blob/main/resources/agent/dietpi.txt) can be found in the `resources` folder.  
     > Some of your settings might differ (e.g., regional settings)
 
     Overview of changed values:
@@ -41,7 +76,6 @@ Your Raspberry Pi should have the [Camera Module](https://www.raspberrypi.org/pr
 
     -AUTO_SETUP_TIMEZONE=Europe/London
     +AUTO_SETUP_TIMEZONE=America/Los_Angeles
-
     
     -AUTO_SETUP_NET_WIFI_ENABLED=0
     +AUTO_SETUP_NET_WIFI_ENABLED=1
@@ -120,7 +154,7 @@ Your Raspberry Pi should have the [Camera Module](https://www.raspberrypi.org/pr
     - [a live video stream with `webrtc-streamer`](#install-and-set-up-webrtc-streamer-for-live-stream-of-camera-feed)
     - [a recording service with FFmpeg](#set-up-ffmpeg-to-record-camera-feed-in-segments-to-file)
 
-### Set up `bcm2835-v4l2` camera driver
+##### Set up `bcm2835-v4l2` camera driver
 
 1. Add `bcm2835-v4l2` to `/etc/modules-load.d/` (kernel modules to load at boot time).
 
@@ -132,7 +166,7 @@ Your Raspberry Pi should have the [Camera Module](https://www.raspberrypi.org/pr
 
 2. Reboot and check that `/dev/video0` exists.
 
-### Install `v4l-utils` and set up camera automatically with `v4l2-ctl`
+##### Install `v4l-utils` and set up camera automatically with `v4l2-ctl`
 
 1. Install `v4l-utils` for debugging & control commands.
 
@@ -171,7 +205,7 @@ Your Raspberry Pi should have the [Camera Module](https://www.raspberrypi.org/pr
 
 3. Reboot and check updated settings with `v4l2-ctl --device=/dev/video0 --all`.
 
-### Install and set up `v4l2loopback` for `dev/video1` loopback device
+##### Install and set up `v4l2loopback` for `dev/video1` loopback device
 
 1. Install [`v4l2loopback`](https://github.com/umlaeute/v4l2loopback).
 
@@ -204,7 +238,7 @@ Your Raspberry Pi should have the [Camera Module](https://www.raspberrypi.org/pr
 
 4. Reboot and check that `/dev/video1` exists.
 
-### Set up FFmpeg to mirror `/dev/video0` to `/dev/video1`
+##### Set up FFmpeg to mirror `/dev/video0` to `/dev/video1`
 
 > Based on [this](https://unix.stackexchange.com/a/186903) StackOverflow answer.
 
@@ -249,7 +283,7 @@ Your Raspberry Pi should have the [Camera Module](https://www.raspberrypi.org/pr
     sudo systemctl start video-mirror.service
     ```
 
-### Install and set up `WebRTC-streamer` for live stream of camera feed
+##### Install and set up `WebRTC-streamer` for live stream of camera feed
 
 1. Retrieve the [latest `armv7l-Release`](https://github.com/mpromonet/webrtc-streamer/releases).
 
@@ -300,9 +334,9 @@ Your Raspberry Pi should have the [Camera Module](https://www.raspberrypi.org/pr
     sudo systemctl start webrtc-streamer.service
     ```
 
-6. Validate WebRTC stream using a [simple HTML page](https://github.com/FraBle/guglhupf/blob/main/support/agent/webrtc-test.html)
+6. Validate WebRTC stream using a [simple HTML page](https://github.com/FraBle/guglhupf/blob/main/resources/agent/webrtc-test.html)
 
-### Set up FFmpeg to record camera feed in segments to file
+##### Set up FFmpeg to record camera feed in segments to file
 
 1. Add monospaced `SourceCodePro` font.
 
