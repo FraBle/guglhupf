@@ -1,0 +1,15 @@
+# /lib/systemd/system/guglhupf.service
+[Unit]
+Description=guglhupf dashcam control station backend
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/usr/local/lib/guglhupf
+ExecStart=/root/.pyenv/shims/poetry run uvicorn guglhupf.main:app --uds /tmp/guglhupf.sock --reload
+Restart=always
+RestartSec=1
+StartLimitInterval=0
+
+[Install]
+WantedBy=multi-user.target
