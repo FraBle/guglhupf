@@ -296,7 +296,7 @@ Your Raspberry Pi should have the [Camera Module](https://www.raspberrypi.org/pr
 2. Move `webrtc-streamer` binary.
 
     ```bash
-    cd /tmp/webrtc-streamer-v0.6.3-Linux-armv7l-Release/tmp
+    cd /tmp/webrtc-streamer-v0.6.3-Linux-armv7l-Release
     sudo mv ./webrtc-streamer /usr/local/bin/webrtc-streamer
     ```
 
@@ -408,7 +408,7 @@ Your Raspberry Pi should have the [Camera Module](https://www.raspberrypi.org/pr
 3. Give execution rights to the new `video-recording` command:
 
     ```bash
-    chmod +x /usr/local/bin/video-recording
+    sudo chmod +x /usr/local/bin/video-recording
     ```
 
 4. Test `video-recording` command:

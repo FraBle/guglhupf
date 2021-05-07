@@ -11,10 +11,7 @@
     <script>
       var webRtcServer = null;
       window.onload = function () {
-        webRtcServer = new WebRtcStreamer(
-          "video",
-          "http://192.168.146.113:8000"
-        );
+        webRtcServer = new WebRtcStreamer("video", "http://192.168.0.167:8000");
         webRtcServer.connect("back");
       };
       window.onbeforeunload = function () {
