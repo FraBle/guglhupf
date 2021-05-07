@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WebRTC Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/webrtc-streamer@0.6.3-3-g4c3864f/html/webrtcstreamer.js"></script>
+  </head>
+  <body>
+    <video id="video-front" autoplay muted></video>
+    <video id="video-back" autoplay muted></video>
+    <script>
+      var webRtcServerFront = null;
+      var webRtcServerBack = null;
+      window.onload = function () {
+        webRtcServerFront = new WebRtcStreamer(
+          "video-front",
+          "http://192.168.146.192/webrtc/front"
+        );
+        webRtcServerFront.connect("front");
+
+        webRtcServerBack = new WebRtcStreamer(
+          "video-back",
+          "http://192.168.146.192/webrtc/back"
+        );
+        webRtcServerBack.connect("back");
+      };
+      window.onbeforeunload = function () {
+        webRtcServerFront.disconnect();
+        webRtcServerBack.disconnect();
+      };
+    </script>
+  </body>
+</html>
