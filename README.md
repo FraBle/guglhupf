@@ -463,3 +463,23 @@ Your Raspberry Pi should have the [Camera Module](https://www.raspberrypi.org/pr
     ```
 
 7. Use `htop` to verify that `video-recording` is running. You can also check the configured output folder, which should contain `.mp4` files now.
+
+<!--
+Badges
+-->
+[travis-badge]:https://img.shields.io/travis/com/FraBle/guglhupf?label=Travis%20CI%20Build&style=flat-square
+[codacy-badge]:https://img.shields.io/codacy/grade/a6fe36617f1944b0b0da8d60a4c89d35?label=Codacy%20Grade&style=flat-square
+[code-climate-badge]:https://img.shields.io/codeclimate/maintainability/FraBle/guglhupf?label=Code%20Climate%20Grade&style=flat-square
+[codefactor-badge]:https://img.shields.io/codefactor/grade/github/FraBle/guglhupf/main?label=CodeFactor%20Grade&style=flat-square
+[lgtm-badge]:https://img.shields.io/lgtm/grade/python/github/FraBle/guglhupf?label=lgtm%20Grade&style=flat-square
+[sonarqube-badge]:https://img.shields.io/sonar/tech_debt/FraBle_guglhupf?label=Sonar%20Tech%20Debt&server=https%3A%2F%2Fsonarcloud.io&style=flat-square
+
+<!--
+Badge URLs
+-->
+[travis-url]:https://travis-ci.com/FraBle/guglhupf
+[codacy-url]:https://app.codacy.com/gh/FraBle/guglhupf
+[code-climate-url]:https://codeclimate.com/github/FraBle/guglhupf
+[codefactor-url]:https://www.codefactor.io/repository/github/frable/guglhupf
+[lgtm-url]:https://lgtm.com/projects/g/FraBle/guglhupf/
+[sonarqube-url]:https://sonarcloud.io/dashboard?id=FraBle_guglhupf
