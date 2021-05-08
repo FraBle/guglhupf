@@ -6,7 +6,7 @@ After=network.target
 [Service]
 Type=simple
 WorkingDirectory=/usr/local/lib/guglhupf
-ExecStart=/root/.pyenv/shims/poetry run uvicorn guglhupf.main:app --uds /tmp/guglhupf.sock --reload
+ExecStart=/root/.pyenv/shims/poetry run uvicorn guglhupf.main:app --uds /tmp/guglhupf.sock
 Restart=always
 RestartSec=1
 StartLimitInterval=0
