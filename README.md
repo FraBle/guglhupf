@@ -7,7 +7,6 @@
 
 <div align="center">
 
-[![Travis CI][travis-badge]][travis-url]
 [![Codacy][codacy-badge]][codacy-url]
 [![Code Climate][code-climate-badge]][code-climate-url]
 [![CodeFactor][codefactor-badge]][codefactor-url]
@@ -467,7 +466,6 @@ Your Raspberry Pi should have the [Camera Module](https://www.raspberrypi.org/pr
 <!--
 Badges
 -->
-[travis-badge]:https://img.shields.io/travis/com/FraBle/guglhupf?label=Travis%20CI%20Build&style=flat-square
 [codacy-badge]:https://img.shields.io/codacy/grade/a6fe36617f1944b0b0da8d60a4c89d35?label=Codacy%20Grade&style=flat-square
 [code-climate-badge]:https://img.shields.io/codeclimate/maintainability/FraBle/guglhupf?label=Code%20Climate%20Grade&style=flat-square
 [codefactor-badge]:https://img.shields.io/codefactor/grade/github/FraBle/guglhupf/main?label=CodeFactor%20Grade&style=flat-square
@@ -477,7 +475,6 @@ Badges
 <!--
 Badge URLs
 -->
-[travis-url]:https://travis-ci.com/FraBle/guglhupf
 [codacy-url]:https://app.codacy.com/gh/FraBle/guglhupf
 [code-climate-url]:https://codeclimate.com/github/FraBle/guglhupf
 [codefactor-url]:https://www.codefactor.io/repository/github/frable/guglhupf
